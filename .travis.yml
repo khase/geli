@@ -28,7 +28,7 @@ branches:
     # - master
     - develop
     # Only for dev 
-   - feature/00-coveralls
+    - feature/00-coveralls
 
 before_script:
   # required for chrome to start properly
