@@ -62,6 +62,10 @@ script:
 after_script:
   # send backend covarage report to coveralls and return back to root for following steps
   - cd api
+  - ls -la
+  - ls -la ./coverage
+  - ls -la ./node_modules/coveralls/bin
+  - cat ./coverage/lcov.info
   - cat ./coverage/lcov.info | ./node_modules/coveralls/bin/coveralls.js -v
   - cd ..
 
