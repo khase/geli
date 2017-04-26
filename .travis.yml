@@ -30,6 +30,11 @@ branches:
     # Only for dev 
     - feature/00-coveralls
 
+cache:
+  directories:
+    - api/node_modules
+    - app/webFrontend/node_modules
+
 before_script:
   # required for chrome to start properly
   - export DISPLAY=:99.0
