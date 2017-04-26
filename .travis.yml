@@ -39,8 +39,8 @@ install:
   # install api and return back to root for following steps
   - cd api
   - npm install
-  # install coveralls
-  - npm install coveralls
+  # install coveralls and depencies
+  - npm install coveralls sshpk
   - cd ..
   # install frontend and return back to root for following steps
   - cd app/webFrontend
