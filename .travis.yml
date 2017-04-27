@@ -29,6 +29,7 @@ branches:
     - develop
     # Only for dev 
     - feature/00-coveralls
+    - feature/14-travis-new
 
 cache:
   directories:
