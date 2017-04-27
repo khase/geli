@@ -71,8 +71,7 @@ after_script:
   - cd api
   - ls -la ./coverage
   - cat ./coverage/lcov.info
-  - cat ./coverage/lcov.info | tee tee.txt | ./node_modules/coveralls/bin/coveralls.js -v
-  - cat tee.txt
+  - cat ./coverage/lcov.info | ./node_modules/coveralls/bin/coveralls.js -v
   - cd ..
 
 # Disable for testing
