@@ -45,7 +45,7 @@ install:
   - cd api
   - npm install
   # install coveralls and depencies
-  - npm install sshpk coveralls
+  - npm install sshpk coveralls mocha-lcov-reporter
   - cd ..
   # install frontend and return back to root for following steps
   - cd app/webFrontend
@@ -71,7 +71,8 @@ after_script:
   - cd api
   - ls -la ./coverage
   - cat ./coverage/lcov.info
-  - cat ./coverage/lcov.info | ./node_modules/coveralls/bin/coveralls.js -v
+  - cat ./coverage/lcov.info | tee tee.txt | ./node_modules/coveralls/bin/coveralls.js -v
+  - cat tee.txt
   - cd ..
 
 # Disable for testing
