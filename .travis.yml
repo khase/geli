@@ -71,7 +71,6 @@ after_script:
   - cd api
   - ls -la ./coverage
   - cat ./coverage/lcov.info
-  - ./node_modules/coveralls/bin/coveralls.js --help
   - cat ./coverage/lcov.info | ./node_modules/coveralls/bin/coveralls.js -v
   - cd ..
 
