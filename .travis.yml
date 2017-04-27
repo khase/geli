@@ -45,7 +45,7 @@ install:
   - cd api
   - npm install
   # install coveralls and depencies
-  - npm install sshpk coveralls mocha-lcov-reporter
+  - npm install coveralls # mocha-lcov-reporter
   - cd ..
   # install frontend and return back to root for following steps
   - cd app/webFrontend
@@ -62,14 +62,13 @@ script:
   # npm scripts won't work here (dunno why...)
   - cd app/webFrontend
   - npm run lint        # run linter
-  # - npm run test        # run test - does not work properly
+  - npm run test        # run test - does not work properly
   - npm run e2e         # run end-to-end-tests
   - cd ../..
 
 after_script:
   # send backend covarage report to coveralls and return back to root for following steps
   - cd api
-  - ls -la ./coverage
   - cat ./coverage/lcov.info
   - cat ./coverage/lcov.info | ./node_modules/coveralls/bin/coveralls.js -v
   - cd ..
