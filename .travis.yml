@@ -77,9 +77,12 @@ after_script:
   - cd api
   - ./node_modules/nlf/bin/nlf-cli.js --csv > ../nlf-licenses.csv
   - cd ../app/webFrontend
-  - ../../api/node_modules/nlf/bin/nlf-cli.js --csv >> ../../nlf-licenses.csv
+    # append frontend licenses to existing csv; we have to skip the first line (header)
+  - ../../api/node_modules/nlf/bin/nlf-cli.js --csv | awk '{if(NR>1)print}'  >> ../../nlf-licenses.csv
   - cd ../..
+  - echo "name,version,directory,repository,summary,from package.json,from license,from readme"
   - cat nlf-licenses.csv | grep -i "apache" # only print apache licenses
+  - cat nlf-licenses.csv
   - cd ..
 
 # Disable for testing
