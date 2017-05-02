@@ -72,11 +72,12 @@ after_script:
   - cd api
   - cat ./coverage/lcov.info
   - cat ./coverage/lcov.info | ./node_modules/coveralls/bin/coveralls.js -v
-  - ./node_modules/nlf/bin/nlf-cli.js --help
   - ./node_modules/nlf/bin/nlf-cli.js --summary detail
+  - ./node_modules/nlf/bin/nlf-cli.js --csv
+  - ls -la
   - cd ../app/webFrontend
   - ../../api/node_modules/nlf/bin/nlf-cli.js --summary detail
-  - cd ..
+  - cd ../..
 
 # Disable for testing
 #notifications:
