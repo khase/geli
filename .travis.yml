@@ -74,8 +74,8 @@ after_script:
   - cat ./coverage/lcov.info | ./node_modules/coveralls/bin/coveralls.js -v
   - ls -la ./node_modules/nlf
   - ls -la ./node_modules/nlf/bin
-  - ./node_modules/nlf/bin/nlf-ci.js --directory .
-  - ./node_modules/nlf/bin/nlf-ci.js --directory ../app/webFrontend/
+  - ./node_modules/nlf/bin/nlf-cli.js --directory .
+  - ./node_modules/nlf/bin/nlf-cli.js --directory ../app/webFrontend/
   - cd ..
 
 # Disable for testing
