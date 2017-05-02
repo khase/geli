@@ -72,6 +72,8 @@ after_script:
   - cd api
   - cat ./coverage/lcov.info
   - cat ./coverage/lcov.info | ./node_modules/coveralls/bin/coveralls.js -v
+  - ls -la ./node_modules/
+  - ls -la ./node_modules/nlf/
   - ./node_modules/nlf/bin/nlf.js --directory .
   - ./node_modules/nlf/bin/nlf.js --directory ../app/webFrontend/
   - cd ..
