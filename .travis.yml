@@ -45,8 +45,8 @@ install:
   # install api and return back to root for following steps
   - cd api
   - npm install
-  # install coveralls and depencies
-  - npm install coveralls # mocha-lcov-reporter
+  # install travis specific stuff
+  - npm install coveralls nlf # mocha-lcov-reporter
   - cd ..
   # install frontend and return back to root for following steps
   - cd app/webFrontend
@@ -72,6 +72,8 @@ after_script:
   - cd api
   - cat ./coverage/lcov.info
   - cat ./coverage/lcov.info | ./node_modules/coveralls/bin/coveralls.js -v
+  - ./node_modules/nlf/bin/nlf.js --directory .
+  - ./node_modules/nlf/bin/nlf.js --directory ../app/webFrontend/
   - cd ..
 
 # Disable for testing
