@@ -77,10 +77,9 @@ after_script:
   - cd api
   - ./node_modules/nlf/bin/nlf-cli.js --csv > ../nlf-licenses.csv
   - cd ../app/webFrontend
-  - ../../api/node_modules/nlf/bin/nlf-cli.js >> ../../nlf-licenses.csv
+  - ../../api/node_modules/nlf/bin/nlf-cli.js --csv >> ../../nlf-licenses.csv
   - cd ../..
-  - cat nlf-licenses.csv | grep apache # only print apache licenses
-  - cat nlf-licenses.csv
+  - cat nlf-licenses.csv | grep -i "apache" # only print apache licenses
   - cd ..
 
 # Disable for testing
