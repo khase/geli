@@ -19,6 +19,8 @@ addons:
       - lsb-base
       # used for frontend e2e tests
       - google-chrome-stable
+      # used for protractor-screenshots
+      - graphicsmagick
 
 services:
   - mongodb
