@@ -19,6 +19,8 @@ addons:
       - lsb-base
       # used for frontend e2e tests
       - google-chrome-stable
+      # used for protractor-screenshots
+      - graphicsmagick
 
 services:
   - mongodb
@@ -29,7 +31,7 @@ branches:
     - master
     - develop
     # Only for development purposes
-    - feature/00-coveralls
+    - feature/e2e-screenshots
     # - feature/14-travis-new
 
 cache:
