@@ -31,7 +31,7 @@ branches:
     - master
     - develop
     # Only for development purposes
-    - feature/00-coveralls
+    - feature/e2e-screenshots
     # - feature/14-travis-new
 
 cache:
