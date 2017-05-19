@@ -77,6 +77,7 @@ script:
 
 after_script:
   # send required files to codecov.io
+  - cat api/coverage/lcov.info
   - .travis/node_modules/.bin/codecov
   # run license checker
   - .travis/license-crawler.sh
