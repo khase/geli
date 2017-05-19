@@ -8,7 +8,7 @@
 [![Build Status](https://travis-ci.org/h-da/geli.svg?branch=develop)](https://travis-ci.org/h-da/geli)
 
 [![Dependency Checker](https://david-dm.org/h-da/geli.svg)](https://david-dm.org/h-da/geli)
-[![Coverage Status](https://coveralls.io/repos/github/h-da/geli/badge.svg?branch=develop)](https://coveralls.io/github/h-da/geli?branch=develop)
+[![codecov](https://codecov.io/gh/h-da/geli/branch/develop/graph/badge.svg)](https://codecov.io/gh/h-da/geli)
 [![Gitter chat](https://badges.gitter.im/h-da/geli.png)](https://gitter.im/mpse-geli/Lobby)
 
 ---
