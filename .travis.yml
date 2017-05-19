@@ -79,7 +79,11 @@ after_script:
   # send required files to codecov.io
   - cat api/coverage/lcov.info
   - cat api/coverage/coverage-final.json
-  - .travis/node_modules/.bin/codecov -f api/coverage/coverage-final.json -f api/coverage/lcov.info
+  - cat api/coverage/coverage-remap.json
+  - .travis/node_modules/.bin/codecov -f api/coverage/coverage-final.json
+  - .travis/node_modules/.bin/codecov -f api/coverage/coverage-remap.json
+  - .travis/node_modules/.bin/codecov -f api/coverage/lcov.info
+  - ls -la api/coverage
   # run license checker
   - .travis/license-crawler.sh
 
