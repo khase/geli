@@ -1,0 +1,15 @@
+codecov:
+  branch: develop
+
+coverage:
+  notify:
+    gitter:
+      default:
+        url: "https://webhooks.gitter.im/e/ourwebhook"
+        threshold: 1%
+
+ignore:
+  - ".travis/"
+
+fixes:
+  - "/home/travis/build/[secure]/::"
