@@ -76,8 +76,8 @@ script:
   - cd ../..
 
 after_script:
-  # send required files to coveralls.io
-  - .travis/coveralls.sh
+  # send required files to codecov.io
+  - .travis/node_modules/.bin/codecov
   # run license checker
   - .travis/license-crawler.sh
 
