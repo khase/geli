@@ -12,6 +12,7 @@
 [![Uptime Robot ratio](https://img.shields.io/uptimerobot/ratio/m779032297-cd1143fdc10b510896f2a344.svg)](https://stats.uptimerobot.com/mq8EDc8lx)
 [![Gitter chat](https://badges.gitter.im/h-da/geli.png)](https://gitter.im/mpse-geli/Lobby)
 
+[![Deps](https://david-dm.org/khase/geli.svg)]
 ---
 
 This project aims to develop a Open-Source platform for E-Learning in computer science.

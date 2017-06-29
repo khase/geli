@@ -26,11 +26,13 @@ services:
 
 branches:
   only:
+    - master
     - develop
     - master
     # This matches tags wit a format of v{MAJOR}.{MINOR}.{FIX} were major minor and fix is supposed to be a number.
     - /^v(\d+).(\d+).(\d+)$/
     # Only for development purposes
+    - feature/00-coveralls
     # - feature/14-travis-new
 
 cache:
@@ -93,7 +95,7 @@ after_success:
 notifications:
   webhooks:
     urls:
-      - https://webhooks.gitter.im/e/0624f63ff4c4c3705162
+      # - https://webhooks.gitter.im/e/0624f63ff4c4c3705162
     on_success: always  # options: [always|never|change] default: always
     on_failure: always  # options: [always|never|change] default: always
     on_start:   always  # options: [always|never|change] default: always
