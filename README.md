@@ -11,6 +11,7 @@
 [![Coverage Status](https://coveralls.io/repos/github/h-da/geli/badge.svg?branch=develop)](https://coveralls.io/github/h-da/geli?branch=develop)
 [![Gitter chat](https://badges.gitter.im/h-da/geli.png)](https://gitter.im/mpse-geli/Lobby)
 
+[![Deps](https://david-dm.org/khase/geli.svg)]
 ---
 
 This project aims to develop a Open-Source platform for E-Learning in computer science.
