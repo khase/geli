@@ -5,6 +5,7 @@ NC='\033[0m'
 echo
 echo "+++ Run docker build and publish. +++"
 echo
+printenv
 if [ "$TRAVIS_BRANCH" == "master" ] || [ "$TRAVIS_BRANCH" == "develop" ]; then
   if [ "$TRAVIS_PULL_REQUEST" == "false" ]; then
     echo "+ build docker images";
