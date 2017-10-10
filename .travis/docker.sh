@@ -6,6 +6,10 @@ echo
 echo "+++ Run docker build and publish. +++"
 echo
 printenv
+
+if [ -n ${TRAVIS_TAG}  ]; then
+  echo "AAAAAAAAAAAAAAAAAAAAHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHH!!!!!!!!!!!!!!!!"
+fi
 if [ "$TRAVIS_BRANCH" == "master" ] || [ "$TRAVIS_BRANCH" == "develop" ]; then
   if [ "$TRAVIS_PULL_REQUEST" == "false" ]; then
     echo "+ build docker images";
@@ -26,7 +30,7 @@ if [ "$TRAVIS_BRANCH" == "master" ] || [ "$TRAVIS_BRANCH" == "develop" ]; then
     echo -e "${YELLOW}+ WARNING: pull request #$TRAVIS_PULL_REQUEST -> skipping docker build and publish${NC}";
   fi
 else
-  if [ -z ${TRAVIS_TAG+x}  ]; then
+  if [ -n ${TRAVIS_TAG}  ]; then
     echo "+ This is a tagged build: $TRAVIS_TAG";
     echo "+ build docker images";
     echo "+ prune dev-dependencies"
