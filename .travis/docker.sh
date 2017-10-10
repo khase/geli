@@ -7,7 +7,7 @@ echo "+++ Run docker build and publish. +++"
 echo
 printenv
 
-if [ -n ${TRAVIS_TAG}  ]; then
+if [ -n "${TRAVIS_TAG}"  ]; then
   echo "AAAAAAAAAAAAAAAAAAAAHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHH!!!!!!!!!!!!!!!!"
 fi
 if [ "$TRAVIS_BRANCH" == "master" ] || [ "$TRAVIS_BRANCH" == "develop" ]; then
