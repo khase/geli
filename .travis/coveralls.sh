@@ -29,6 +29,10 @@ if [ $(npm_package_is_installed coveralls) == 0 ]; then
 fi
 cd ..
 
+sed "s/return 'warn';/return 'info';/g" .travis/node_modules/coveralls/lib/logger.js >> .travis/node_modules/coveralls/lib/logger.js.tmp
+rm .travis/node_modules/coveralls/lib/logger.js
+mv .travis/node_modules/coveralls/lib/logger.js.tmp .travis/node_modules/coveralls/lib/logger.js
+
 echo "+ sending lcov file to coveralls"
 #cat api/coverage/lcov.info
 #echo "+ sed"
@@ -36,7 +40,7 @@ echo "+ sending lcov file to coveralls"
 #cat api/coverage/lcov.info
 #echo "+ sending"
 cp api/coverage/lcov.info api/coverage/lcov.info.txt
-cat api/coverage/lcov.info.txt | $MODULE_PATH/$BIN_PATH/coveralls -v -s
+cat api/coverage/lcov.info.txt | $MODULE_PATH/$BIN_PATH/coveralls -v
 # cat api/coverage/lcov.info | $MODULE_PATH/$BIN_PATH/coveralls.js -v
 
 echo "+ INFO: Currently only the api-coverdata are generated and send"
