@@ -36,7 +36,7 @@ echo "+ sending lcov file to coveralls"
 #cat api/coverage/lcov.info
 #echo "+ sending"
 cp api/coverage/lcov.info api/coverage/lcov.info.txt
-cat api/coverage/lcov.info.txt | $MODULE_PATH/$BIN_PATH/coveralls -v
+cat api/coverage/lcov.info.txt | $MODULE_PATH/$BIN_PATH/coveralls -v -s
 # cat api/coverage/lcov.info | $MODULE_PATH/$BIN_PATH/coveralls.js -v
 
 echo "+ INFO: Currently only the api-coverdata are generated and send"
