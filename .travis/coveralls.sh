@@ -29,7 +29,7 @@ if [ $(npm_package_is_installed coveralls) == 0 ]; then
 fi
 cd ..
 
-sed "s/return 'warn';/return 'info';/g" .travis/node_modules/coveralls/lib/logger.js >> .travis/node_modules/coveralls/lib/logger.js.tmp
+sed "s/return 'warn';/return 'debug';/g" .travis/node_modules/coveralls/lib/logger.js >> .travis/node_modules/coveralls/lib/logger.js.tmp
 rm .travis/node_modules/coveralls/lib/logger.js
 mv .travis/node_modules/coveralls/lib/logger.js.tmp .travis/node_modules/coveralls/lib/logger.js
 
