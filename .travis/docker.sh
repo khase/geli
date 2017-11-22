@@ -19,9 +19,6 @@ echo "+++ Run docker build and publish. +++"
 echo
 printenv
 
-if [ -n "${TRAVIS_TAG}"  ]; then
-  echo "AAAAAAAAAAAAAAAAAAAAHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHH!!!!!!!!!!!!!!!!"
-fi
 if [ "$TRAVIS_BRANCH" == "master" ] || [ "$TRAVIS_BRANCH" == "develop" ]; then
   if [ "$TRAVIS_PULL_REQUEST" == "false" ]; then
     echo "+ build docker images";
@@ -29,7 +26,7 @@ if [ "$TRAVIS_BRANCH" == "master" ] || [ "$TRAVIS_BRANCH" == "develop" ]; then
     ( cd api && npm prune --production )
     docker build -t hdafbi/geli-api:latest -f .docker/api/Dockerfile .
     docker build -t hdafbi/geli-web-frontend:latest -f .docker/web-frontend/Dockerfile .
-    
+
     echo "+ publish docker images";
     docker login -u="$DOCKER_USERNAME" -p="$DOCKER_PASSWORD";
     tag_and_push_api_and_web "latest"
@@ -45,7 +42,7 @@ else
     ( cd api && npm prune --production )
     docker build -t hdafbi/geli-api:$TRAVIS_TAG -f .docker/api/Dockerfile .
     docker build -t hdafbi/geli-web-frontend:$TRAVIS_TAG -f .docker/web-frontend/Dockerfile .
-    
+
     echo "+ publish docker images";
     docker login -u="$DOCKER_USERNAME" -p="$DOCKER_PASSWORD";
     tag_and_push_api_and_web ${TRAVIS_TAG}
