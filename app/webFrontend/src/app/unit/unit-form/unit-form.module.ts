@@ -1,3 +1,4 @@
+/* tslint:disable:max-line-length */
 import {NgModule} from '@angular/core';
 import {CommonModule} from '@angular/common';
 import {CodeKataUnitFormComponent} from './code-kata-unit-form/code-kata-unit-form.component';
@@ -7,19 +8,23 @@ import {UnitFormComponent} from './unit-form.component';
 import {UnitGeneralInfoFormComponent} from './unit-general-info-form/unit-general-info-form.component';
 import {FileUploadComponent} from '../../upload/file-upload/file-upload.component';
 import {VideoUploadComponent} from '../../upload/video-upload/video-upload.component';
-import {MaterialModule} from '@angular/material';
 import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 import {AceEditorModule} from 'ng2-ace-editor';
 import {FileUploadModule} from 'ng2-file-upload';
+import {UnitModule} from '../unit.module';
+import {FreeTextUnitEditorComponent} from './free-text-unit-form/free-text-unit-editor/free-text-unit-editor.component';
+import {FreeTextUnitEditorDialog} from './free-text-unit-form/free-text-unit-editor/free-text-unit-editor-dialog/free-text-unit-editor.dialog';
+import {SharedModule} from '../../shared/shared.module';
 
 @NgModule({
   imports: [
     CommonModule,
     FormsModule,
     ReactiveFormsModule,
-    MaterialModule,
+    SharedModule,
     AceEditorModule,
-    FileUploadModule
+    FileUploadModule,
+    UnitModule
   ],
   declarations: [
     CodeKataUnitFormComponent,
@@ -28,7 +33,9 @@ import {FileUploadModule} from 'ng2-file-upload';
     UnitFormComponent,
     UnitGeneralInfoFormComponent,
     FileUploadComponent,
-    VideoUploadComponent
+    VideoUploadComponent,
+    FreeTextUnitEditorComponent,
+    FreeTextUnitEditorDialog
   ],
   exports: [
     CodeKataUnitFormComponent,
@@ -36,7 +43,10 @@ import {FileUploadModule} from 'ng2-file-upload';
     TaskUnitEditComponent,
     UnitFormComponent,
     UnitGeneralInfoFormComponent,
-    VideoUploadComponent
+    VideoUploadComponent,
+  ],
+  entryComponents: [
+    FreeTextUnitEditorDialog
   ]
 })
 export class UnitFormModule {

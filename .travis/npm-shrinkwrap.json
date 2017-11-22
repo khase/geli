@@ -241,18 +241,10 @@
       "dev": true
     },
     "coveralls": {
-      "version": "3.0.0",
-      "from": "coveralls@>=3.0.0 <4.0.0",
-      "resolved": "https://registry.npmjs.org/coveralls/-/coveralls-3.0.0.tgz",
-      "dev": true,
-      "dependencies": {
-        "minimist": {
-          "version": "1.2.0",
-          "from": "minimist@>=1.2.0 <2.0.0",
-          "resolved": "https://registry.npmjs.org/minimist/-/minimist-1.2.0.tgz",
-          "dev": true
-        }
-      }
+      "version": "2.13.1",
+      "from": "coveralls@*",
+      "resolved": "https://registry.npmjs.org/coveralls/-/coveralls-2.13.1.tgz",
+      "dev": true
     },
     "create-error-class": {
       "version": "3.0.2",

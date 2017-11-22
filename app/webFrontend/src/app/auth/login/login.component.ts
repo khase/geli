@@ -5,7 +5,7 @@ import {AuthenticationService} from '../../shared/services/authentication.servic
 import {AuthGuardService} from '../../shared/services/auth-guard.service';
 import {FormBuilder, FormGroup, Validators} from '@angular/forms';
 import {ShowProgressService} from '../../shared/services/show-progress.service';
-import {MdSnackBar} from '@angular/material';
+import {MatSnackBar} from '@angular/material';
 
 @Component({
   templateUrl: './login.component.html',
@@ -21,7 +21,7 @@ export class LoginComponent implements OnInit {
               private authGuard: AuthGuardService,
               private authenticationService: AuthenticationService,
               private showProgress: ShowProgressService,
-              private snackBar: MdSnackBar,
+              private snackBar: MatSnackBar,
               private formBuilder: FormBuilder) {
   }
 
@@ -37,11 +37,7 @@ export class LoginComponent implements OnInit {
     this.loginForm.value.email = this.loginForm.value.email.replace(/\s/g, '').toLowerCase();
     this.authenticationService.login(this.loginForm.value.email, this.loginForm.value.password).then(
       (val) => {
-        if (this.authGuard.redirectUrl) {
-          this.router.navigate([this.authGuard.redirectUrl]);
-        } else {
-          this.router.navigate(['/']);
-        }
+        this.router.navigate(['/']);
         this.showProgress.toggleLoadingGlobal(false);
         this.loading = false;
         this.snackBar.open('Login successful', 'Dismiss', {duration: 2000});

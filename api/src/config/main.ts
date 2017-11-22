@@ -6,7 +6,7 @@ export default {
   baseurl: process.env.BASEURL || 'http://localhost:4200',
 
   // Database connection information
-  database: `mongodb://${process.env.DB_HOST || 'localhost'}:27017`,
+  database: `mongodb://${process.env.DB_HOST || 'localhost'}:27017/${process.env.DB_NAME || 'geli'}`,
 
   // Setting port for server
   port: process.env.PORT || 3030,
@@ -26,4 +26,7 @@ export default {
   teacherMailRegex: process.env.TEACHER_MAIL_REGEX || '^.+@.+\..+$',
 
   nonProductionWarning: process.env.NONPRODUCTIONWARNING || undefined,
+
+  sentryDsn: process.env.SENTRY_DSN,
+  sentryDsnPublic: process.env.SENTRY_DSN_PUBLIC,
 };

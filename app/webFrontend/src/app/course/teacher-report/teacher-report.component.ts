@@ -5,7 +5,8 @@ import {IUnit} from '../../../../../../shared/models/units/IUnit';
 import {ActivatedRoute} from '@angular/router';
 import {IProgress} from '../../../../../../shared/models/IProgress';
 import {ProgressService} from '../../shared/services/data/progress.service';
-import {IUser} from '../../../../../../shared/models/IUser';
+import {UserService} from '../../shared/services/user.service';
+import {User} from '../../models/User';
 
 @Component({
   selector: 'app-teacher-report',
@@ -16,7 +17,7 @@ export class TeacherReportComponent implements OnInit {
 
   id: string;
   course: ICourse;
-  students: IUser[];
+  students: User[];
   progressableUnits: IUnit[] = [];
   progress: IProgress[];
   report: any[] = [];
@@ -24,7 +25,8 @@ export class TeacherReportComponent implements OnInit {
   constructor(private route: ActivatedRoute,
               private courseService: CourseService,
               private unitService: UnitService,
-              private progressService: ProgressService) {
+              private progressService: ProgressService,
+              private userService: UserService) {
   }
 
   ngOnInit() {
@@ -39,7 +41,7 @@ export class TeacherReportComponent implements OnInit {
     .then(
       (course: any) => {
         this.course = course;
-        this.students = course.students;
+        this.students = course.students.map((student) => new User(student));
         for (const lecture of course.lectures) {
           for (const unit of lecture.units) {
             if (unit.progressable) {

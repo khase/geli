@@ -1,12 +1,14 @@
 import {Component, OnInit} from '@angular/core';
-import {Router} from '@angular/router';
+import {ActivatedRoute, Router} from '@angular/router';
 import {FormGroup, FormBuilder, Validators} from '@angular/forms';
-import {MdSnackBar} from '@angular/material';
+import {MatSnackBar} from '@angular/material';
 import {UserDataService} from '../../shared/services/data.service';
 import {IUser} from '../../../../../../shared/models/IUser';
 import {UserService} from '../../shared/services/user.service';
 import {ShowProgressService} from '../../shared/services/show-progress.service';
 import {matchPasswords} from '../../shared/validators/validators';
+import {DialogService} from '../../shared/services/dialog.service';
+import {pwPattern} from '../../auth/password';
 
 @Component({
   selector: 'app-user-edit',
@@ -18,22 +20,36 @@ export class UserEditComponent implements OnInit {
   id: string;
   user: IUser;
   userForm: FormGroup;
+  passwordPatternText: string;
 
   constructor(private router: Router,
+              private route: ActivatedRoute,
               private userService: UserService,
               private userDataService: UserDataService,
               private showProgress: ShowProgressService,
               private formBuilder: FormBuilder,
-              public snackBar: MdSnackBar) {
+              public dialogService: DialogService,
+              public snackBar: MatSnackBar) {
     this.generateForm();
-    this.getUserData();
+  }
+
+  userIsAdmin(): boolean {
+    return this.userService.isAdmin();
   }
 
   ngOnInit() {
+    this.passwordPatternText = pwPattern.text;
+    this.route.params.subscribe(params => {
+      this.id = decodeURIComponent(params['id']);
+
+      if (this.id === 'undefined') {
+        this.id = this.userService.user._id;
+      }
+    });
+    this.getUserData();
   }
 
   getUserData() {
-    this.id = this.userService.user._id;
     this.userDataService.readSingleItem(this.id).then(
       (val: any) => {
         this.user = val;
@@ -84,15 +100,18 @@ export class UserEditComponent implements OnInit {
     this.showProgress.toggleLoadingGlobal(true);
     this.userDataService.updateItem(this.user).then(
       (val) => {
-        console.log(val);
         this.showProgress.toggleLoadingGlobal(false);
         this.snackBar.open('Profile successfully updated.', '', {duration: 3000});
-        this.userService.setUser(val);
+
+        if (this.userService.isLoggedInUser(val)) {
+          this.userService.setUser(val);
+        }
+
         this.navigateBack();
       },
       (error) => {
         this.showProgress.toggleLoadingGlobal(false);
-        this.snackBar.open(JSON.parse(error._body).message, 'Dismiss');
+        this.snackBar.open(error.json().message, 'Dismiss');
       });
   }
 
@@ -105,12 +124,28 @@ export class UserEditComponent implements OnInit {
       username: [''],
       email: ['', Validators.required],
       currentPassword: [''],
-      password: [''],
+      password: ['', Validators.pattern(pwPattern.pattern)],
       confirmPassword: ['']
     }, {validator: matchPasswords('password', 'confirmPassword')});
   }
 
+  openAddPictureDialog() {
+    this.dialogService.upload(this.user)
+      .subscribe((response) => {
+      if (response) {
+        if (response.success) {
+          this.userService.setUser(response.user);
+          this.snackBar.open('User image successfully uploaded.', '', {duration: 3000});
+        }
+      }
+    });
+  }
+
   private navigateBack() {
-    this.router.navigate(['/profile']);
+    if (this.userService.isLoggedInUser(this.user)) {
+      this.router.navigate(['/profile']);
+    } else {
+      this.router.navigate(['/profile', this.user._id]);
+    }
   }
 }
