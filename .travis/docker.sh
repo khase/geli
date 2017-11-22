@@ -17,7 +17,7 @@ function tag_and_push_api_and_web {
 echo
 echo "+++ Run docker build and publish. +++"
 echo
-printenv
+# printenv
 
 if [ "$TRAVIS_BRANCH" == "master" ] || [ "$TRAVIS_BRANCH" == "develop" ]; then
   if [ "$TRAVIS_PULL_REQUEST" == "false" ]; then
