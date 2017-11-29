@@ -72,7 +72,7 @@ script:
   - cd ..
   # run backend-tests and return back to root for following steps
   - cd api
-  - npm run test        # run backend test
+  - npm run build        # run backend test
   - cd ..
   # run frontend-tests and return back to root for following steps
   - cd app/webFrontend
@@ -84,7 +84,7 @@ script:
 
 after_script:
   # send required files to coveralls.io
-  - .travis/coveralls.sh
+  #- .travis/coveralls.sh
 
 after_success:
   #- .travis/package-checker.sh
