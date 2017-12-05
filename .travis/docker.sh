@@ -35,7 +35,7 @@ function check_dockerhub_major {
                 # Check if current line was bigger
                 if [[ $? == 0 ]]; then
                     echo "+ found bigger MINOR: $line > $TRAVIS_TAG"
-                    return false
+                    return 1
                 fi
             else
                 echo "+ skipping $line, not same MAJOR"
@@ -45,7 +45,7 @@ function check_dockerhub_major {
         fi
     done <<< "$EXISTING_TAGS"
 
-    return true
+    return 0
 }
 
 echo
@@ -97,14 +97,15 @@ else
         echo -e "${YELLOW}+ WARNING: will NOT tag Major '${REAL_MAJOR}' and Minor '${REAL_MINOR}', only the full tag '${TRAVIS_TAG}'${NC}"
     else
         echo "+ tag images"
-        echo -e "${YELLOW}+ WARNING: Major tagging is currently not implemented, will skip major tagging"
         check_dockerhub_major
-        if [ $? == true ]; then
+        if [ $? == 0 ]; then
             echo "+ => tagged Major: ${REAL_MAJOR}"
-            tag_and_push_api_and_web REAL_MAJOR
+            tag_and_push_api_and_web ${REAL_MAJOR}
+        else
+            echo -e "${YELLOW}+ INFO: didn't tag major $REAL_MAJOR, because there is a higher minor ${REAL_MAJOR}.*"
         fi
         echo "+ => tagged Minor: ${REAL_MINOR}"
-        tag_and_push_api_and_web REAL_MINOR
+        tag_and_push_api_and_web ${REAL_MINOR}
     fi
   else
     echo -e "${YELLOW}+ WARNING: branch $TRAVIS_BRANCH is not whitelisted -> skipping docker build and publish${NC}";
