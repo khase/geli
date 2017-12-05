@@ -27,6 +27,10 @@ if [ $(npm_package_is_installed coveralls) == 0 ]; then
 fi
 cd ${IPWD}
 
+sed "s/return 'warn';/return 'info';/g" .travis/node_modules/coveralls/lib/logger.js >> .travis/node_modules/coveralls/lib/logger.js.tmp
+rm .travis/node_modules/coveralls/lib/logger.js
+mv .travis/node_modules/coveralls/lib/logger.js.tmp .travis/node_modules/coveralls/lib/logger.js
+
 echo "+ sending lcov file to coveralls"
 # since we are using typescript and remap our coverage data to the ts files we need to remove the "build" part of all paths
 # this could easily be done with some sed magic
