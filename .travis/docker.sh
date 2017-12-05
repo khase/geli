@@ -12,6 +12,8 @@ function tag_and_push_api_and_web {
     docker tag hdafbi/geli-web-frontend:latest hdafbi/geli-web-frontend:${1}
     docker push hdafbi/geli-api:${1}
     docker push hdafbi/geli-web-frontend:${1}
+    echo "innerhalb"
+    docker images
 }
 
 function check_dockerhub_major {
@@ -81,6 +83,8 @@ else
 
     echo "+ publish docker images";
     docker login -u="$DOCKER_USERNAME" -p="$DOCKER_PASSWORD";
+    echo "ausserhalb"
+    docker images
     echo "+ => tagged: ${TRAVIS_TAG}"
     tag_and_push_api_and_web ${TRAVIS_TAG}
 
