@@ -1,82 +1,91 @@
-# Great E-Learning Informatics (geli)
+ # geli
 
-## Communication
+![geli-Logo](.var/geli-readme-icon.png)
 
-- [geli gitter channel](https://gitter.im/mpse-geli/)
+[![GitHub release](https://img.shields.io/github/release/h-da/geli.svg)](https://github.com/h-da/geli/releases)
+[![Build Status](https://travis-ci.org/h-da/geli.svg?branch=develop)](https://travis-ci.org/h-da/geli)
+[![Coverage Status](https://coveralls.io/repos/github/h-da/geli/badge.svg?branch=develop)](https://coveralls.io/github/h-da/geli?branch=develop)
+[![Uptime Robot ratio](https://img.shields.io/uptimerobot/ratio/m779032297-cd1143fdc10b510896f2a344.svg)](https://stats.uptimerobot.com/mq8EDc8lx)
+[![Gitter chat](https://badges.gitter.im/h-da/geli.png)](https://gitter.im/mpse-geli/Lobby)
+[![DavidDM-API](https://david-dm.org/h-da/geli.svg?path=api)](https://david-dm.org/h-da/geli?path=api)
+[![DavidDM-WEB](https://david-dm.org/h-da/geli.svg?path=app/webFrontend)](https://david-dm.org/h-da/geli?path=app/webFrontend)
 
-## Requirements
+geli is an open source e-learning platform. Try the [demo](https://demo.geli.fbi.h-da.de/)!
 
-- [Node.js](https://nodejs.org/en/)
-- [MongoDB](https://www.mongodb.com/download-center#community)
+The project is mainly developed by Computer Science Master's students at the 
+[University of Applied Sciences in Darmstadt, Germany](https://www.fbi.h-da.de).
 
-# Backend
+If you need help using or want to support the project, just say hello on 
+[Gitter](https://gitter.im/mpse-geli/Lobby).
 
-## Installation
 
-1. Open a Terminal and type following:
+## Usage
 
-```bash
-cd /path/to/project/api
-npm install
-```
+Your best option for running the project is by using our Docker images:
 
-## Run APP
+- [API](https://hub.docker.com/r/hdafbi/geli-api)
+- [Web frontend](https://hub.docker.com/r/hdafbi/geli-web-frontend)
 
-```bash
-cd /api
-npm start
-```
+Have a look at the sample [docker-compose file](docker-compose.prod.yml) on how 
+to wire things together.
 
-## Testing
+For a list of all configuration options see [docs/configuration](docs/configuration.md).
 
-1. Copy `config/test.dist.json` to `config/test.json` and change it accordingly.
-2. To execute the tests:
 
-```bash
-cd /api
-npm test
-```
+## Development
 
-# Frontend
-## Getting started
+The codebase is written entirely in [TypeScript](https://www.typescriptlang.org/).
 
-## Angular CLI (globally required):
+The API is based on [Node.js](https://nodejs.org) together with [Express](http://expressjs.com), 
+[routing controllers](https://github.com/pleerock/routing-controllers) and 
+[MongoDB](https://www.mongodb.com).
 
-Run `npm install -g @angular/cli@latest` to install the latest version of the angular cli globally.
+The web frontend is built with [Angular](https://angular.io/) 4 and 
+[Angular Material](https://material.angular.io/) components.
 
-## How to use:
 
-1. Run `npm install` in the root folder of the app
-2. Run `ng serve` to use the angular-cli
+### Running
 
-If you have problems with the angular-cli version try following:
+You have multiple options for running the project for development purposes.
 
-1. Create a new anglular-cli projekt `ng new example-app`
-2. Copy the folder ´/src´ from this project to the new project
-3. Run `ng serve`
+- [Docker](docs/development/running-with-docker.md)
+- [Locally](docs/development/running-locally.md)
+<!--- Needs to be updated: - [Vagrant](docs/development/running-with-vagrant.md) --->
 
-This project was generated with [angular-cli](https://github.com/angular/angular-cli) version 1.0.0-beta.17.
+After successfully starting, the web frontend will be available at 
+[http://localhost:4200](http://localhost:4200).
 
-## Development server
-Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The app will automatically reload if you change any of the source files.
+The API will be available at [http://localhost:3030](http://localhost:3030). To avoid 
+[CORS](https://en.wikipedia.org/wiki/Cross-origin_resource_sharing) the API will also be proxied by 
+the Angular development server and be available at 
+[http://localhost:4200/api](http://localhost:4200/api).
 
-## Code scaffolding
 
-Run `ng generate component component-name` to generate a new component. You can also use `ng generate directive/pipe/service/class`.
+### Configuration
 
-## Build
+The default configuration should already enable you to start developing.
 
-Run `ng build` to build the project. The build artifacts will be stored in the `dist/` directory. Use the `-prod` flag for a production build.
+For more information on how to configure e.g. e-mail see 
+[docs/development/configuration](docs/development/configuration.md).
 
-## Running unit tests
 
-Run `ng test` to execute the unit tests via [Karma](https://karma-runner.github.io).
+### Commands
 
-## Running end-to-end tests
+#### API & web frontend
+  - __Running__: `npm run start`
+  - __Linting__: `npm run lint`
+  - __Testing__: `npm run test`
+  
+#### API
+  - __Loading fixtures__ (sample data): `npm run load:fixtures`
+  - __[Debugging](https://nodejs.org/en/docs/inspector/)__: `npm run start:inspect`
+  
+#### Web frontend
+  - __End to end tests__: `npm run e2e`
+  - __[Angular CLI](https://cli.angular.io/)__: `npm run ng`
+    (Be sure to pass flags with additional dashes. E.g.: `npm run ng build -- --prod`)
 
-Run `ng e2e` to execute the end-to-end tests via [Protractor](http://www.protractortest.org/). 
-Before running the tests make sure you are serving the app via `ng serve`.
 
-## Further help
+## Contributing
 
-To get more help on the `angular-cli` use `ng --help` or go check out the [Angular-CLI README](https://github.com/angular/angular-cli/blob/master/README.md).
+Please have a look at our [contributing guide](.github/CONTRIBUTING.md).

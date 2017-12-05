@@ -1,45 +1,75 @@
-import { Component } from '@angular/core';
-import {UserService} from "./shared/user.service";
-import {AuthenticationService} from "./shared/authentification.service";
-import {ShowProgressService} from "./shared/show-progress.service";
+import {Component, OnInit} from '@angular/core';
+import {UserService} from './shared/services/user.service';
+import {AuthenticationService} from './shared/services/authentication.service';
+import {ShowProgressService} from './shared/services/show-progress.service';
+import {Router} from '@angular/router';
+import {APIInfoService} from './shared/services/data.service';
+import {APIInfo} from './models/APIInfo';
+import {isNullOrUndefined} from 'util';
+import {RavenErrorHandler} from './shared/services/raven-error-handler.service';
+import {MatSnackBar} from '@angular/material';
 
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
-  styleUrls: ['./app.component.css']
+  styleUrls: ['./app.component.scss']
 })
-export class AppComponent {
+export class AppComponent implements OnInit {
+
   title = 'app works!';
-  loggedIn = false;
-
   showProgressBar = false;
+  apiInfo: APIInfo;
 
-  constructor(private userService: UserService, private authService: AuthenticationService, private showProgress: ShowProgressService) {
-    //localStorage.clear();
-      showProgress.toggleSidenav$.subscribe(
-          toggle => {
-              this.toggleProgressBar();
-          }
-      )
+  constructor(private router: Router,
+              private authenticationService: AuthenticationService,
+              public userService: UserService,
+              private showProgress: ShowProgressService,
+              private apiInfoService: APIInfoService,
+              private ravenErrorHandler: RavenErrorHandler,
+              private snackBar: MatSnackBar
+  ) {
+    showProgress.toggleSidenav$.subscribe(
+      toggle => {
+        this.toggleProgressBar();
+      }
+    );
   }
 
-  toggleProgressBar(){
-    if(this.showProgressBar == true) {
-      this.showProgressBar = false;
-    } else {
-      this.showProgressBar = true;
-    }
+  ngOnInit(): void {
+    this.authenticationService.reloadUser();
+    this.apiInfoService.readItems()
+    .then((info: any) => {
+      this.ravenErrorHandler.setup(info.sentryDsn);
+      this.apiInfo = info;
+    })
+    .catch((err) => {
+      this.snackBar.open('Error on init', '', {duration: 3000});
+    });
   }
 
-  isLoggedIn(): boolean {
-    if (this.userService.getCurrentUserName()) {
-      this.loggedIn = true;
-    }
-    return this.loggedIn;
+  hasWarning() {
+    return !isNullOrUndefined(this.apiInfo) && !isNullOrUndefined(this.apiInfo.nonProductionWarning);
   }
 
-  logout(): void {
-    this.loggedIn = false;
-    this.authService.logout();
+  isLoggedIn() {
+    return this.authenticationService.isLoggedIn;
+  }
+
+  logout() {
+    this.authenticationService.logout();
+  }
+
+  toggleProgressBar() {
+    this.showProgressBar = !this.showProgressBar;
+  }
+
+  isAdmin(): boolean {
+    return this.userService.isAdmin();
+  }
+
+  specialContainerStyle(): string {
+    const routeTest = /^(\/|\/login|\/register)$/.test(this.router.url);
+
+    return (routeTest && !this.isLoggedIn()) ? 'special-style' : '';
   }
 }

@@ -18,6 +18,9 @@ node_modules/
 .settings/
 *.sublime-workspace
 
+# Vagrant
+/.vagrant
+
 # IDE - VSCode
 .vscode/*
 !.vscode/settings.json
@@ -41,3 +44,30 @@ testem.log
 # System Files
 .DS_Store
 Thumbs.db
+*.js
+nohup.out
+# Do not ignore js files under sub-project-root (gulpfile.js, karma.conf.js, protractor.conf.js, ...)
+!/api/*.js
+!/app/webFrontend/*.js
+!/.travis/*.js
+!/api/test/mocha.env.js
+
+# Ignore CSV-Files generated from nlf
+/**/nlf-license*.csv
+/**/nlf-licenses*.json
+
+# API
+/api/uploads/*
+!/api/uploads/users/.gitkeep
+/api/temp/*
+/api/build
+/api/coverage
+/api/docs
+docker-compose.override.yml
+
+# Web Frontend
+# nothing so far
+
+# Never ignore .gitkeep files
+# Note that the ignore has to look like: /some/path/* and not eg. /some/path
+!/**/.gitkeep

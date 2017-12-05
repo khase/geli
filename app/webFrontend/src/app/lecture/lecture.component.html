@@ -1,0 +1,7 @@
+<ng-container class="lecture-container" *ngIf="lecture">
+  <app-expandable-div [title]="lecture.name" (notifyParent)="toggleOpen($event)"></app-expandable-div>
+  <p>{{lecture.description}}</p>
+  <div *ngIf="this.opened">
+    <app-unit *ngIf="lecture.units" [units]="lecture.units"></app-unit>
+  </div>
+</ng-container>

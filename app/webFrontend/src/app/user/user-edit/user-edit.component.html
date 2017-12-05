@@ -1,0 +1,34 @@
+<h1>Edit profile</h1>
+
+<form name="form" class="user-form" (ngSubmit)="onSubmit()" [formGroup]="userForm">
+  <div class="form-group" formGroupName="profile">
+    <mat-form-field class="full-width">
+      <input matInput formControlName="firstName" placeholder="First name"/>
+    </mat-form-field>
+
+    <mat-form-field class="full-width">
+      <input matInput formControlName="lastName" placeholder="Last name"/>
+    </mat-form-field>
+  </div>
+
+  <mat-form-field class="full-width">
+    <input matInput formControlName="email" placeholder="e-mail"/>
+  </mat-form-field>
+  <div *ngIf="showPwFields()">
+    <mat-form-field class="full-width">
+      <input matInput type="password" formControlName="currentPassword" placeholder="Current password"/>
+    </mat-form-field>
+
+    <app-password-input  [form]="userForm"></app-password-input>
+
+  </div>
+  <button mat-raised-button color="primary" class="mat-button" type="submit" [disabled]="!userForm?.valid">Save</button>
+  <button mat-button class="mat-button" routerLink="/profile" routerLinkActive="active">
+    Cancel
+  </button>
+</form>
+<p>
+  <button mat-raised-button color="accent" class="mat-button" (click)="openAddPictureDialog()">
+    Upload new picture
+  </button>
+</p>
