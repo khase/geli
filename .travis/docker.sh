@@ -8,8 +8,8 @@ IPWD="$(pwd)"
 . ${DIR}/_shared-vars.sh
 
 function tag_and_push_api_and_web {
-    docker tag hdafbi/geli-api hdafbi/geli-api:${1}
-    docker tag hdafbi/geli-web-frontend hdafbi/geli-web-frontend:${1}
+    docker tag hdafbi/geli-api:latest hdafbi/geli-api:${1}
+    docker tag hdafbi/geli-web-frontend:latest hdafbi/geli-web-frontend:${1}
     docker push hdafbi/geli-api:${1}
     docker push hdafbi/geli-web-frontend:${1}
 }
