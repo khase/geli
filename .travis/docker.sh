@@ -78,8 +78,8 @@ else
     echo "+ build docker images";
     echo "+ prune dev-dependencies"
     ( cd api && npm prune --production )
-    docker build -t hdafbi/geli-api:$TRAVIS_TAG -f .docker/api/Dockerfile .
-    docker build -t hdafbi/geli-web-frontend:$TRAVIS_TAG -f .docker/web-frontend/Dockerfile .
+    docker build -t hdafbi/geli-api:latest -f .docker/api/Dockerfile .
+    docker build -t hdafbi/geli-web-frontend:latest -f .docker/web-frontend/Dockerfile .
 
     echo "+ publish docker images";
     docker login -u="$DOCKER_USERNAME" -p="$DOCKER_PASSWORD";
