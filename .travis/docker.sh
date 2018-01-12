@@ -8,10 +8,12 @@ IPWD="$(pwd)"
 . ${DIR}/_shared-vars.sh
 
 function tag_and_push_api_and_web {
-    docker tag hdafbi/geli-api hdafbi/geli-api:${1}
-    docker tag hdafbi/geli-web-frontend hdafbi/geli-web-frontend:${1}
+    docker tag hdafbi/geli-api:latest hdafbi/geli-api:${1}
+    docker tag hdafbi/geli-web-frontend:latest hdafbi/geli-web-frontend:${1}
     docker push hdafbi/geli-api:${1}
     docker push hdafbi/geli-web-frontend:${1}
+    echo "innerhalb"
+    docker images
 }
 
 function check_dockerhub_major {
@@ -52,6 +54,8 @@ function check_dockerhub_major {
 echo
 echo "+++ Run docker build and publish. +++"
 echo
+# printenv
+
 if [ "$TRAVIS_BRANCH" == "master" ] || [ "$TRAVIS_BRANCH" == "develop" ]; then
   if [ "$TRAVIS_PULL_REQUEST" == "false" ]; then
     echo "+ build docker images";
@@ -59,7 +63,7 @@ if [ "$TRAVIS_BRANCH" == "master" ] || [ "$TRAVIS_BRANCH" == "develop" ]; then
     ( cd api && npm prune --production )
     docker build -t hdafbi/geli-api:latest -f .docker/api/Dockerfile .
     docker build -t hdafbi/geli-web-frontend:latest -f .docker/web-frontend/Dockerfile .
-    
+
     echo "+ publish docker images";
     docker login -u="$DOCKER_USERNAME" -p="$DOCKER_PASSWORD";
     echo "+ => tagging: latest"
