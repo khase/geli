@@ -69,6 +69,7 @@ script:
   # check for versions
   - .travis/check-version.sh
   # run license checker and write license.json / dependencies.ts
+  - .travis/license-crawler.sh
   - cd .travis
   #- node license.js
   - cd ..
